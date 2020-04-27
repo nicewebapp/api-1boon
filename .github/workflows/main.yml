@@ -2,6 +2,8 @@ name: api-data
 on:
   push:
     branches: [ master ]  
+  schedule:
+    - cron: "*/5 * * * *"
 jobs:
   get:
     runs-on: ubuntu-latest
