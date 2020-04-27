@@ -2,8 +2,6 @@ name: api-data
 on:
   push:
     branches: [ master ]  
-  schedule:
-    - cron: "*/5 * * * *"
 jobs:
   get:
     runs-on: ubuntu-latest
@@ -13,11 +11,8 @@ jobs:
         wget -O recent.json ${{ secrets.API_RECENT }} 
         wget -O popular.json ${{ secrets.API_POPULAR }} 
         wget -O view.json ${{ secrets.API_VIEW }} 
-    - name: Publish
-      uses: niceaji/gh-push@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.PUBLISH_ACCESS_TOKEN }}
-        COMMIT_FILES: '*'
-        REPO_FULLNAME: nicewebapp/api-1boon
-        BRANCH: gh-pages
-        
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./
