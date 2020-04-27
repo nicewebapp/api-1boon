@@ -1,0 +1,20 @@
+name: api 
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+jobs:
+  get:
+    runs-on: ubuntu-latest
+    steps:
+    - name: wget 
+      run: |
+        wget -O recent.json ${{ API_RECENT }} 
+        wget -O popular.json ${{ API_POPULAR }} 
+        wget -O view.json ${{ API_VIEW }} 
+    - name: Publish
+      uses: selenehyun/gh-push@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.PUBLISH_ACCESS_TOKEN }}
+        COMMIT_FILES: '*'
+        REPO_FULLNAME: nicewebapp/api-1boon
+        BRANCH: gh-pages
