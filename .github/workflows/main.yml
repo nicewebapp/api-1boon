@@ -20,3 +20,4 @@ jobs:
         COMMIT_FILES: '*'
         REPO_FULLNAME: nicewebapp/api-1boon
         BRANCH: gh-pages
+        
